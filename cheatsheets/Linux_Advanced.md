@@ -1,229 +1,233 @@
-# Linux Cheatsheet
+# My Linux Cheatsheet
 
-## Argumente & Hilfe
-Die meisten Befehle ändern ihr Verhalten durch **Flags** (Schalter).
-- Kurzform: `-a`
-- Langform: `--all`
+## Arguments & Help
+Most commands change their behavior using **flags** (switches).
+- Short form: `-a`
+- Long form: `--all`
 
-| Befehl | Beschreibung | Beispiel |
+| Command | Description | Example |
 | :--- | :--- | :--- |
-| `ls -a` | Zeigt **alle** Dateien (auch versteckte). | `ls -a` |
-| `ls --help` | Zeigt Hilfe und Optionen. | `ls --help` |
-| `man` | Öffnet das Handbuch eines Befehls. | `man ls` |
-| `file` | Zeigt den tatsächlichen Dateityp. | `file unknown_file` |
+| `ls -a` | Shows **all** files (including hidden ones). | `ls -a` |
+| `ls --help` | Shows me the help menu and options. | `ls --help` |
+| `man` | Opens the manual for a command. | `man ls` |
+| `file` | Shows me the actual file type (header analysis). | `file unknown_file` |
 
-> **Navigation im `man`:**  
-> `↓` Scrollen • `h` Hilfe • `q` Beenden
+> **Navigation in `man`:**
+> `↓` Scroll • `h` Help • `q` Quit
 
 ---
 
-## Dateien & Ordner erstellen/bearbeiten
+## Creating & Editing Files/Folders
 
-| Befehl | Vollständiger Name | Funktion | Beispiel |
+| Command | Full Name | Function | Example |
 | :--- | :--- | :--- | :--- |
-| `touch` | touch | Erstellt eine leere Datei. | `touch notiz.txt` |
-| `mkdir` | make directory | Erstellt einen Ordner. | `mkdir urlaubsbilder` |
-| `cp` | copy | Kopiert Datei/Ordner. | `cp notiz.txt backup.txt` |
-| `mv` | move | Verschiebt oder benennt um. | `mv alt.txt neu.txt` |
-| `rm` | remove | Löscht eine Datei. | `rm muell.txt` |
-| `rm -R` | remove recursive | Löscht Ordner + Inhalt. | `rm -R mein_ordner` |
+| `touch` | touch | Creates an empty file for me. | `touch note.txt` |
+| `mkdir` | make directory | Creates a folder. | `mkdir vacation_pics` |
+| `cp` | copy | Copies a file or folder. | `cp note.txt backup.txt` |
+| `mv` | move | Moves **or** renames a file. | `mv old.txt new.txt` |
+| `rm` | remove | Deletes a file. | `rm trash.txt` |
+| `rm -R` | remove recursive | Deletes a folder + contents. | `rm -R my_folder` |
 
 ---
 
-## Benutzer & Berechtigungen
+## Users & Permissions
 
-Linux unterscheidet zwischen **Owner**, **Group**, **Others**.
 
-**Rechte anzeigen:**  
+Linux distinguishes between **Owner**, **Group**, and **Others**.
+
+**Viewing Permissions:**
 `ls -l` → `-rw-r--r-- 1 user group ...`
 
-| Zeichen | Bedeutung | Erklärung |
+| Char | Meaning | Explanation |
 | :--- | :--- | :--- |
-| `r` | Read | Datei lesen / Ordnerinhalt anzeigen |
-| `w` | Write | Datei ändern / Dateien im Ordner erstellen/löschen |
-| `x` | Execute | Datei ausführen / Ordner betreten |
+| `r` | Read | Read file / View folder content |
+| `w` | Write | Edit file / Create or delete files in folder |
+| `x` | Execute | Run file as script / Enter directory |
 
-**Benutzer wechseln:**
+**Switching Users:**
 
-| Befehl | Beschreibung |
+| Command | Description |
 | :--- | :--- |
-| `su [user]` | Wechselt zum Benutzer. |
-| `su -l [user]` | Wechselt Benutzer + lädt dessen Umgebung. |
+| `su [user]` | Switches to the user. |
+| `su -l [user]` | Switches user + loads their full environment. |
 
 ---
 
-## Wichtige Systemverzeichnisse
+## Important System Directories
 
-| Pfad | Zweck / Inhalt |
+
+| Path | Purpose / Content |
 | :--- | :--- |
-| `/etc` | Konfigurationen, `passwd`, `shadow`. |
-| `/var` | Variable Daten: Logs, Datenbanken, Backups. |
-| `/root` | Home-Verzeichnis des root‑Users. |
-| `/tmp` | Temporäre Dateien, für alle beschreibbar. |
+| `/etc` | Configurations, `passwd`, `shadow`. |
+| `/var` | Variable data: Logs, databases, backups. |
+| `/root` | Home directory of the root user. |
+| `/tmp` | Temporary files, writable by everyone. |
 
 ---
 
-# Berechtigungen & Eigentümer (erweitert)
+# Permissions & Owners (Extended)
 
-## `chmod` – Rechte ändern
+## `chmod` – Changing Permissions
 
-| Befehl | Beispiel | Erklärung |
+| Command | Example | Explanation |
 | :--- | :--- | :--- |
-| `chmod +x skript.sh` | Macht Datei ausführbar. | Notwendig für Skripte, Tools, Exploits. |
-| `chmod 777 datei` | Gibt jedem alle Rechte. | Unsicher, aber in CTFs oft nützlich. |
-| `chmod 600 id_rsa` | Nur Besitzer darf lesen/schreiben. | Pflicht für SSH‑Private‑Keys. |
+| `chmod +x script.sh` | Makes a file executable. | Necessary for my scripts, tools, and exploits. |
+| `chmod 777 file` | Gives everyone every permission. | Unsafe, but often useful in CTFs. |
+| `chmod 600 id_rsa` | Only owner can read/write. | Mandatory for SSH Private Keys. |
 
 ---
 
-## `chown` – Besitzer ändern
+## `chown` – Changing Owners
 
-| Befehl | Beispiel | Erklärung |
+| Command | Example | Explanation |
 | :--- | :--- | :--- |
-| `chown user:user datei` | `chown serkan:serkan config.txt` | Ändert Besitzer und Gruppe. |
-| `chown -R user:group ordner/` | `chown -R www-data:www-data /var/www` | Rekursiv für Ordner. |
+| `chown user:user file` | `chown serkan:serkan config.txt` | Changes owner and group. |
+| `chown -R user:group folder/` | `chown -R www-data:www-data /var/www` | Recursive (for folders). |
 
 ---
 
-# Netzwerk & Remote
+# Network & Remote
 
-## `ssh` – Remote‑Login
+## `ssh` – Remote Login
 
-| Befehl | Beispiel | Was es tut |
+| Command | Example | What it does |
 | :--- | :--- | :--- |
-| `ssh user@IP` | `ssh serkan@10.10.10.10` | Baut eine SSH‑Verbindung auf. |
-| `ssh -i key.pem user@IP` | `ssh -i id_rsa root@192.168.1.10` | Login mit Private Key. |
+| `ssh user@IP` | `ssh serkan@10.10.10.10` | Establishes an SSH connection. |
+| `ssh -i key.pem user@IP` | `ssh -i id_rsa root@192.168.1.10` | Login using a Private Key. |
 
 ---
 
-## `yes` – Automatisches Bestätigen
+## `yes` – Auto-Confirming
 
-| Befehl | Beispiel | Erklärung |
+| Command | Example | Explanation |
 | :--- | :--- | :--- |
-| `yes` | `yes | apt install paket` | Gibt unendlich oft „y“ aus. |
-| `yes` (bei SSH) | Wird genutzt, um Fingerprint automatisch zu akzeptieren. | Praktisch für Skripte. |
+| `yes` | `yes | apt install package` | Outputs "y" infinitely. |
+| `yes` (with SSH) | Used to auto-accept fingerprints. | Great for my scripts. |
 
 ---
 
-## Texteditoren (Nano & VIM)
-**Nano** ist einsteigerfreundlich. **VIM** ist mächtiger, aber komplexer.
+## Text Editors (Nano & VIM)
+**Nano** is beginner-friendly. **VIM** is powerful but complex.
 
-**Nano starten:** `nano dateiname`
+**Start Nano:** `nano filename`
 
-| Shortcut (Nano) | Funktion |
+| Shortcut (Nano) | Function |
 | :--- | :--- |
-| `Ctrl + X` | Beenden (fragt nach Speichern). |
-| `Ctrl + O` | Speichern (Write Out). |
-| `Ctrl + W` | Suchen (Where Is). |
-| `Ctrl + K` | Ganze Zeile ausschneiden. |
-| `Ctrl + U` | Text einfügen. |
+| `Ctrl + X` | Exit (asks to save). |
+| `Ctrl + O` | Save (Write Out). |
+| `Ctrl + W` | Search (Where Is). |
+| `Ctrl + K` | Cut entire line. |
+| `Ctrl + U` | Paste text. |
 
 ---
 
-## Dateien transferieren
+## Transferring Files
 
-### Download aus dem Web
-| Befehl | Beschreibung | Beispiel |
+### Download from Web
+| Command | Description | Example |
 | :--- | :--- | :--- |
-| `wget URL` | Lädt Dateien über HTTP/HTTPS herunter. | `wget http://seite.com/datei.txt` |
-| `curl -O URL` | Lädt Datei herunter und speichert sie unter gleichem Namen. | `curl -O http://seite.com/datei` |
+| `wget URL` | Downloads files via HTTP/HTTPS. | `wget http://site.com/file.txt` |
+| `curl -O URL` | Downloads and saves with original name. | `curl -O http://site.com/file` |
 
-> **Hinweis:**  
-> `curl` ohne `-O` zeigt den Inhalt nur im Terminal an – speichert aber NICHT.
+> **Note:**
+> `curl` without `-O` only prints content to my terminal – it does NOT save it.
 
 ---
 
-### Eigener Webserver (Python)
-Startet einen temporären Webserver im aktuellen Verzeichnis.
+### My Webserver (Python)
+Starts a temporary webserver in my current directory.
 
-| Befehl | Port | Download von anderem PC |
+| Command | Port | Download from another PC |
 | :--- | :--- | :--- |
-| `python3 -m http.server` | 8000 (Standard) | `wget http://[IP]:8000/datei` |
+| `python3 -m http.server` | 8000 (Default) | `wget http://[IP]:8000/file` |
 
 ---
 
 ### SCP (Secure Copy via SSH)
-Kopiert Dateien sicher zwischen Computern. Syntax ist immer `cp QUELLE ZIEL`.
+Copies files securely. Syntax is always `cp SOURCE DESTINATION`.
 
-| Richtung | Syntax | Beispiel |
+| Direction | Syntax | Example |
 | :--- | :--- | :--- |
-| **Upload** (Lokal → Remote) | `scp [Datei] [User]@[IP]:[Pfad]` | `scp file.txt root@10.10.10.10:/root/` |
-| **Download** (Remote → Lokal) | `scp [User]@[IP]:[Pfad] [Ziel]` | `scp root@10.10.10.10:/root/file.txt .` |
+| **Upload** (Local → Remote) | `scp [File] [User]@[IP]:[Path]` | `scp file.txt root@10.10.10.10:/root/` |
+| **Download** (Remote → Local) | `scp [User]@[IP]:[Path] [Target]` | `scp root@10.10.10.10:/root/file.txt .` |
 
 ---
 
-## Prozessmanagement
+## Process Management
 
-Jedes Programm ist ein Prozess mit einer **PID** (Process ID).
 
-### Anzeigen & Beenden
-| Befehl | Beschreibung |
+Every program is a process with a **PID** (Process ID).
+
+### Viewing & Killing
+| Command | Description |
 | :--- | :--- |
-| `ps` | Zeigt Prozesse der aktuellen Session. |
-| `ps aux` | Zeigt **alle** Prozesse aller User. |
-| `top` | Echtzeit‑Prozessmonitor. |
-| `kill [PID]` | Beendet Prozess (SIGTERM). |
-| `kill -9 [PID]` | Erzwingt Beenden (SIGKILL). |
+| `ps` | Shows processes in my current session. |
+| `ps aux` | Shows **all** processes from all users. |
+| `top` | Real-time process monitor. |
+| `kill [PID]` | Stops a process (SIGTERM). |
+| `kill -9 [PID]` | Forces a process to stop (SIGKILL). |
 
 ---
 
-### Dienste verwalten (systemctl)
-`systemctl [Option] [Dienstname]`
+### Managing Services (systemctl)
+`systemctl [Option] [ServiceName]`
 
-* `start` / `stop` – Dienst starten/stoppen  
-* `enable` / `disable` – Autostart an/aus  
-* `status` – Status anzeigen  
+* `start` / `stop` – Start/Stop service
+* `enable` / `disable` – Turn autostart on/off
+* `status` – Check if service is running
 
 ---
 
-### Hintergrund & Vordergrund
-| Befehl | Beschreibung |
+### Background & Foreground
+| Command | Description |
 | :--- | :--- |
-| `&` | Startet Befehl im Hintergrund. |
-| `Ctrl + Z` | Pausiert Prozess → Hintergrund. |
-| `fg` | Holt Prozess zurück in den Vordergrund. |
+| `&` | Starts command in the background. |
+| `Ctrl + Z` | Pauses process → moves to background. |
+| `fg` | Brings process back to foreground. |
 
 ---
 
-## Automatisierung (Cronjobs)
+## Automation (Cronjobs)
 
-**Cron editieren:** `crontab -e`
 
-**Syntax:**  
-`MIN STD TAG MONAT WOCHENTAG BEFEHL`  
+**Edit Cron:** `crontab -e`
+
+**Syntax:**
+`MIN HOUR DAY MONTH WEEKDAY COMMAND`
 `*` = Wildcard
 
-| Beispiel | Bedeutung |
+| Example | Meaning |
 | :--- | :--- |
-| `0 * * * *` | Jede volle Stunde. |
-| `0 12 * * *` | Täglich um 12:00 Uhr. |
-| `*/5 * * * *` | Alle 5 Minuten. |
-| `@reboot` | Beim Systemstart. |
+| `0 * * * *` | Every hour. |
+| `0 12 * * *` | Every day at 12:00 PM. |
+| `*/5 * * * *` | Every 5 minutes. |
+| `@reboot` | On system startup. |
 
 ---
 
-## Paketmanagement (APT) & Logs
+## Package Management (APT) & Logs
 
 ### APT
-| Befehl | Beschreibung |
+| Command | Description |
 | :--- | :--- |
-| `apt update` | Aktualisiert Paketlisten. |
-| `apt install [Name]` | Installiert Paket. |
-| `apt remove [Name]` | Entfernt Paket. |
-| `add-apt-repository` | Fügt Repository hinzu. |
+| `apt update` | Updates my package lists. |
+| `apt install [Name]` | Installs a package. |
+| `apt remove [Name]` | Removes a package. |
+| `add-apt-repository` | Adds a new repository. |
 
 ---
 
-### Wichtige Log-Dateien (`/var/log/`)
-* `/var/log/apache2/access.log` – Webserver Zugriffe  
-* `/var/log/apache2/error.log` – Webserver Fehler  
-* `/var/log/syslog` – Systemnachrichten  
-* `/var/log/auth.log` – Login‑Versuche (SSH, su, sudo)
+### Important Log Files (`/var/log/`)
+* `/var/log/apache2/access.log` – Webserver hits
+* `/var/log/apache2/error.log` – Webserver errors
+* `/var/log/syslog` – System messages
+* `/var/log/auth.log` – Login attempts (SSH, su, sudo)
 
 ---
 
-## History & Spurenanalyse
+## History & Trace Analysis
 
-| Befehl | Beschreibung | Warum wichtig? |
+| Command | Description | Why is this important? |
 | :--- | :--- | :--- |
-| `history` | Zeigt die letzten ~1000 Befehle an. | Oft Passwörter sichtbar, wenn Admin sie versehentlich direkt eingibt (`mysql -u root -pSecret123`). |
-| `cat ~/.bash_history` | Zeigt gespeicherte History‑Datei des Users. | Wenn du Zugriff auf einen anderen User hast, kannst du seine History lesen. |
+| `history` | Shows the last ~1000 commands. | Passwords are often visible here if admins typed them directly (e.g., `mysql -u root -pSecret123`). |
+| `cat ~/.bash_history` | Shows the saved history file. | If I compromise a user, I can read their history to see what they did. |
